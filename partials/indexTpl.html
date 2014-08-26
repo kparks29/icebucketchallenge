@@ -1,0 +1,4 @@
+<div x-ng-repeat="video in videos | filter:searchBy" class="container">
+  <h1><a ng-href="{{ '#!/v/' + video.ytId}}">{{video.title}}</a></h1>
+  <iframe width="480" height="360" ng-src="{{trustSrc('http://youtube.com/embed/' + video.ytId)}}"  frameborder="0" allowfullscreen></iframe>
+</div>

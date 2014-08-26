@@ -3,7 +3,10 @@
     <title></title>
     <script type="text/javascript" src="js/angular.min.js"></script>
     <script type="text/javascript" src="js/angular-sanitize.min.js"></script>
+    <script src="http://code.angularjs.org/1.2.0-rc.2/angular-route.js"></script>
+    <script src="http://rawgithub.com/kirstein/angular-disqus/master/angular-disqus.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
+
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
   </head>
@@ -36,9 +39,9 @@
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
-    <div x-ng-repeat="video in videos | filter:searchBy" class="container">
-      <h1>{{video.title}}</h1>
-      <iframe width="480" height="360" ng-src="{{trustSrc(video.url)}}" frameborder="0" allowfullscreen></iframe>
+
+    <div class="span9" id="content" data-ng-view>
+      <!-- <img src="img/spinner.gif" class="loading-spinner" alt="you spin me right round"> -->      
     </div>
   </body>
 </html>
