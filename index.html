@@ -3,6 +3,8 @@
     <title></title>
     <script type="text/javascript" src="js/angular.min.js"></script>
     <script type="text/javascript" src="js/angular-sanitize.min.js"></script>
+    <script src="https://cdn.firebase.com/js/client/1.0.21/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js"></script>    
     <script type="text/javascript" src="js/main.js"></script>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
@@ -19,7 +21,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Brand</a>
+          <a class="navbar-brand" href="#">Ice Bucket Challenge Tube</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -27,7 +29,7 @@
           
           <form class="navbar-form navbar-left" role="search">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search" ng-model="searchBy">
+              <input type="text" class="form-control" placeholder="Search" ng-model="searchBy" id="search">
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
           </form>
@@ -54,9 +56,9 @@
       <div class="col-md-5"> 
         <div class="ad">Ad's go here</div>
         <div class="holder">
-          <div x-ng-repeat="video in videos | filter:searchBy" class="videoContainer">
+          <div x-ng-repeat="video in videos | orderBy:'popularity':true | filter:searchBy" class="videoContainer">
             <div><iframe ng-src="{{trustSrc(video.url)}}" frameborder="0" allowfullscreen class="videoIframe"></iframe></div>
-            <div><h4>{{video.title}}</h4></div> 
+            <div><h4>{{video.title}} - {{video.popularity}}</h4></div> 
           </div>
         </div>
       </div>
