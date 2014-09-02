@@ -1,15 +1,12 @@
 <html x-ng-app="ibcApp">
   <head>
     <title></title>
-    <script src="http://code.angularjs.org/1.2.0-rc.2/angular.js"></script>
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.0rc2/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/angular-sanitize.min.js"></script>
     <script src="http://code.angularjs.org/1.2.0-rc.2/angular-route.js"></script>
     <script src="http://rawgithub.com/kirstein/angular-disqus/master/angular-disqus.js"></script>
-    <script src="https://cdn.firebase.com/js/client/1.0.21/firebase.js"></script>
-    <script src="https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js"></script>    
     <script type="text/javascript" src="js/main.js"></script>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
   </head>
   <body x-ng-controller="ibcCtrl">
@@ -44,21 +41,19 @@
     </nav>
 <!-- Load Partials -->
     <div  class="container">
-      <div class="col-md-7" id="content" data-ng-view>
-        <!-- <img src="img/spinner.gif" class="loading-spinner" alt="you spin me right round"> -->  
-      </div> 
-
+        <div class="col-md-7" id="content" data-ng-view>
+        </div> 
 <!-- End Load Partials -->
 
       <div class="col-md-5"> 
         <div class="ad">
-          <img ng-src="http://placekitten.com/250/200">
+          <img ng-src="http://placekitten.com/359/200">
         </div>
         <div class="holder">
           <h3>Top Ranked Videos</h3>
-          <div x-ng-repeat="video in videos | orderBy:'popularity':true | filter:searchBy" class="videoContainer">
-            <div><img width="130" ng-src="http://img.youtube.com/vi/{{video.ytId}}/mqdefault.jpg"></div>
-            <div><h4><a ng-href="{{ '#!/v/' + video.ytId}}">{{video.title}}</a> - {{video.popularity}}</h4></div> 
+          <div x-ng-repeat="video in videos | orderBy:'popularity':true" class="videoContainer">
+            <div><img width="130" ng-src="http://img.youtube.com/vi/{{video.yt_id}}/mqdefault.jpg"></div>
+            <div><h4><a ng-href="{{ '#!/v/' + video.yt_id}}">{{video.title}}</a> - {{video.popularity}}</h4></div> 
           </div>
         </div>
       </div>
