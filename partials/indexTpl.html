@@ -1,4 +1,8 @@
-<div x-ng-repeat="video in videos | filter:searchBy">
+<div x-ng-repeat="video in videos">
   <h1><a ng-href="{{ '#!/v/' + video.yt_id}}">{{video.title}}</a></h1>
-  <iframe width="480" height="360" ng-src="{{trustSrc('http://youtube.com/embed/' + video.yt_id)}}"  frameborder="0" allowfullscreen></iframe>
+  <a ng-href="{{ '#!/v/' + video.yt_id}}"><div style="position:relative">
+    <img ng-src="http://img.youtube.com/vi/{{video.yt_id}}/0.jpg">
+    <div class="bigThumb"></div>
+  </div></a>
+<!--   <iframe width="480" height="360" ng-src="{{trustSrc('http://youtube.com/embed/' + video.yt_id)}}"  frameborder="0" allowfullscreen></iframe> -->
 </div>

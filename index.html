@@ -29,9 +29,9 @@
           
           <form class="navbar-form navbar-left" role="search">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search For Videos" ng-model="searchBy" id="search">
+              <input type="text" class="form-control" placeholder="Search For Videos" ng-model="searchBy" id="search" ng-keyup="querySearch();">
             </div>
-            <button type="submit" class="btn btn-default">Submit</button>
+            <!-- <button type="submit" class="btn btn-default">Submit</button> -->
           </form>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#">Login</a></li>
@@ -40,9 +40,9 @@
       </div><!-- /.container-fluid -->
     </nav>
 <!-- Load Partials -->
-    <div  class="container">
-        <div class="col-md-7" id="content" data-ng-view>
-        </div> 
+    <div  class="container" ng-init="searchBy='';querySearch();">
+      <div class="col-md-7" id="content" data-ng-view>
+    </div> 
 <!-- End Load Partials -->
 
       <div class="col-md-5"> 
@@ -51,7 +51,7 @@
         </div>
         <div class="holder">
           <h3>Top Ranked Videos</h3>
-          <div x-ng-repeat="video in videos | orderBy:'popularity':true" class="videoContainer">
+          <div x-ng-repeat="video in topVids | orderBy:'popularity':true" class="videoContainer">
             <div><img width="130" ng-src="http://img.youtube.com/vi/{{video.yt_id}}/mqdefault.jpg"></div>
             <div><h4><a ng-href="{{ '#!/v/' + video.yt_id}}">{{video.title}}</a> - {{video.popularity}}</h4></div> 
           </div>

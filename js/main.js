@@ -17,11 +17,19 @@ app.config(function($disqusProvider, $locationProvider, $routeProvider) {
 });
 
 app.controller("ibcCtrl", function($scope, $sce, $routeParams, $http){
-  $http.get(host + '/api/v1/videos.json?page=1&per_page=15').success(function(videos) {
-    $scope.videos = videos['results'];
+  $http.get(host + '/api/v1/videos.json?page=1&per_page=30').success(function(videos) {
+    $scope.topVids = videos['results'];
   });
+
   $scope.route = $routeParams;
   $scope.trustSrc = function(src) {
     return $sce.trustAsResourceUrl(src);
   };
+
+  $scope.querySearch = function(){
+    $http.get(host + '/api/v1/videos.json?page=1&per_page=15&query=' + $scope.searchBy).success(function(videos) {
+      $scope.videos = videos['results'];
+    });
+  };
+
 });

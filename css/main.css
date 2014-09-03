@@ -16,6 +16,24 @@
   width: 600px;
 }
 
+.bigThumb {
+  content: "";
+  position: absolute;
+  top: 33%;
+  left: 168px;
+  width: 150px;
+  height: 150px;
+  z-index: 100;
+  opacity: 0.75;
+  background-image: url("http://www.plowsharecenter.org/img/y.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  
+}
+.bigThumb:hover {
+  opacity: 1;
+}
+
 /* Comment area */
 
 .commentArea {
