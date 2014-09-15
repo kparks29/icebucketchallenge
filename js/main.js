@@ -1,6 +1,6 @@
-var app = angular.module("ibcApp", ['ngRoute', 'ngSanitize', 'ngDisqus', 'truncFilter']);
-// var host = 'http://iceblastapi.herokuapp.com';
-var host = 'http://localhost:3000';
+var app = angular.module("ibcApp", ['ngRoute', 'ngSanitize', 'ngDisqus', 'truncFilter', 'ngCookies']);
+var host = 'http://iceblastapi.herokuapp.com';
+// var host = 'http://localhost:3000';
 
 app.config(function($disqusProvider, $locationProvider, $routeProvider) {
   $disqusProvider.setShortname('ibcblast'); // Configure the disqus shortname
@@ -15,9 +15,11 @@ app.config(function($disqusProvider, $locationProvider, $routeProvider) {
   }).otherwise({
     redirectTo : '/featured'
   });
+
 });
 
-app.controller("ibcCtrl", function($scope, $sce, $routeParams, $http){
+app.controller("ibcCtrl", function($scope, $sce, $routeParams, $http, $cookieStore){
+  
   $http.get(host + '/api/v1/videos.json?page=1&per_page=30').success(function(videos) {
     $scope.topVids = videos['results'];
   });
@@ -34,13 +36,48 @@ app.controller("ibcCtrl", function($scope, $sce, $routeParams, $http){
   };
 
   $scope.update = function(video) {
-    $http.put(host + "/api/v1/videos/" + video.yt_id + ".json?vote=" + video.vote);
-    if (video.vote == "up"){
-      video.popularity++;}
-    else if (video.vote == "down"){
-      video.popularity--;}
+    if (!checkForCookie(video)) {
+      $http.put(host + "/api/v1/videos/" + video.yt_id + ".json?vote=" + video.vote);
+      if (video.vote == "up"){
+        video.popularity++;}
+      else if (video.vote == "down"){
+        video.popularity--;}
+      }
+    else {
+      console.log("You already voted on this")
+    }
   };
+  
+  function makeCookie(video) {
+    $cookieStore.put(video.yt_id, video.vote);
+  }
 
+  function getCookie(video) {
+    if ($cookieStore.get(video.yt_id)){
+      return true
+    }
+    else {
+      makeCookie(video);
+      return false;
+    }
+  }
+
+  function checkForCookie(video) {
+    var temp = getCookie(video);
+    console.log(temp)
+    return temp
+  }
+  function makeid(){
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for( var i=0; i < 25; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+  }
+  
+  
 });
 
 angular.module('truncFilter', []).
