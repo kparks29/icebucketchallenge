@@ -36,7 +36,7 @@ app.controller("ibcCtrl", function($scope, $sce, $routeParams, $http, $cookieSto
   };
 
   $scope.update = function(video) {
-    if (!checkForCookie(video)) {
+    if (!getCookie(video)) {
       $http.put(host + "/api/v1/videos/" + video.yt_id + ".json?vote=" + video.vote);
       if (video.vote == "up"){
         video.popularity++;}
@@ -62,11 +62,6 @@ app.controller("ibcCtrl", function($scope, $sce, $routeParams, $http, $cookieSto
     }
   }
 
-  function checkForCookie(video) {
-    var temp = getCookie(video);
-    console.log(temp)
-    return temp
-  }
   function makeid(){
     var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
