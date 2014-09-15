@@ -28,7 +28,12 @@ app.controller("ibcCtrl", function($scope, $sce, $routeParams, $http, $cookieSto
   $scope.trustSrc = function(src) {
     return $sce.trustAsResourceUrl(src);
   };
-
+  if ($scope.route.id) {
+    $http.get(host + "/api/v1/videos/" + $scope.route.id + ".json?").success(function(video){
+      $scope.singleVideo = video;
+    });
+  }
+  
   $scope.querySearch = function(){
     $http.get(host + '/api/v1/videos.json?page=1&per_page=15&query=' + $scope.searchBy).success(function(videos) {
       $scope.videos = videos['results'];
@@ -60,16 +65,6 @@ app.controller("ibcCtrl", function($scope, $sce, $routeParams, $http, $cookieSto
       makeCookie(video);
       return false;
     }
-  }
-
-  function makeid(){
-    var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-    for( var i=0; i < 25; i++ )
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-    return text;
   }
   
   

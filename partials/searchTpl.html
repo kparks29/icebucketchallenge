@@ -1,7 +1,8 @@
 <div class="mainVideoContainer">
   <div>
-    <iframe width="480" height="360" ng-src="{{trustSrc('http://youtube.com/embed/' + route.id + '?autoplay=1')}}" frameborder="0" allowfullscreen></iframe>
+    <iframe width="600" height="400" ng-src="{{trustSrc('http://youtube.com/embed/' + route.id + '?autoplay=1')}}" frameborder="0" allowfullscreen></iframe>
   </div>
+  <div class="description">{{singleVideo.description}}</div>
 </div>
 
 <div disqus="route.id"></div>

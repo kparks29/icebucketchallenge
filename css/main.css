@@ -6,13 +6,14 @@
 
 /* main video area */
 
-.mainVideoContainer {
-  width: 100%;
-  height: 60%
+
+
+.mainVideoImage {
+  height: 400px;
+  width: 600px;
 }
 
-.mainVideoIframe {
-  height: 400px;
+.mainVideoTitle {
   width: 600px;
 }
 
@@ -20,7 +21,7 @@
   content: "";
   position: absolute;
   top: 33%;
-  left: 168px;
+  left: 225px;
   width: 150px;
   height: 150px;
   z-index: 100;
@@ -32,6 +33,12 @@
 }
 .bigThumb:hover {
   opacity: 1;
+}
+
+.description {
+  padding-top: 10px;
+  width: 600px;
+  margin-bottom: 75px;
 }
 
 /* Comment area */
