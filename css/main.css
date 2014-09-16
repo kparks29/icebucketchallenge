@@ -17,6 +17,10 @@
   width: 600px;
 }
 
+#content button {
+  margin-bottom: 15px;
+}
+
 .bigThumb {
   content: "";
   position: absolute;

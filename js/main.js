@@ -3,11 +3,11 @@ var host = 'http://iceblastapi.herokuapp.com';
 // var host = 'http://localhost:3000';
 
 app.config(function($disqusProvider, $locationProvider, $routeProvider) {
-  $disqusProvider.setShortname('ibcblast'); // Configure the disqus shortname
-  $locationProvider.hashPrefix('!');        // Disqus needs hashbang in urls. If you are using pushstate then no need for this.
-  // Configure your amazing routes
+  $disqusProvider.setShortname('ibcblast'); 
+  $locationProvider.hashPrefix('!');       
+
   $routeProvider.when('/v/:id', {
-    templateUrl : 'partials/searchTpl.html',
+    templateUrl : 'partials/videoTpl.html',
     controller  : 'ibcCtrl'
   }).when('/featured', {
     templateUrl : 'partials/indexTpl.html',
@@ -15,11 +15,11 @@ app.config(function($disqusProvider, $locationProvider, $routeProvider) {
   }).otherwise({
     redirectTo : '/featured'
   });
-
 });
 
 app.controller("ibcCtrl", function($scope, $sce, $routeParams, $http, $cookieStore){
-  
+  $scope.searchBy = "";
+
   $http.get(host + '/api/v1/videos.json?page=1&per_page=30').success(function(videos) {
     $scope.topVids = videos['results'];
   });
@@ -28,16 +28,35 @@ app.controller("ibcCtrl", function($scope, $sce, $routeParams, $http, $cookieSto
   $scope.trustSrc = function(src) {
     return $sce.trustAsResourceUrl(src);
   };
+
   if ($scope.route.id) {
     $http.get(host + "/api/v1/videos/" + $scope.route.id + ".json?").success(function(video){
       $scope.singleVideo = video;
     });
-  }
+  };
+  
+  $scope.initVideosLoad = function(){
+    $http.get(host + '/api/v1/videos.json?page=1&per_page=15').success(function(videos) {
+      $scope.videosMeta = videos['meta'];  
+      $scope.videos = videos['results'];
+      }
+    );
+  };
+
+  $scope.addMoreVideos = function(){
+    $http.get($scope.videosMeta['next_page']).success(function(videos) {        
+      for (var i = 0; i < videos['results'].length; i++) {
+          $scope.videos.push(videos['results'][i]);
+      };
+    });
+  };
   
   $scope.querySearch = function(){
-    $http.get(host + '/api/v1/videos.json?page=1&per_page=15&query=' + $scope.searchBy).success(function(videos) {
+    $http.get(host + '/api/v1/videos.json?page=1&per_page=15&query=' + $scope.searchBy).success(function(videos) {  
+      $scope.videosMeta = videos['meta'];     
       $scope.videos = videos['results'];
-    });
+      }
+    );
   };
 
   $scope.update = function(video) {
@@ -47,9 +66,8 @@ app.controller("ibcCtrl", function($scope, $sce, $routeParams, $http, $cookieSto
         video.popularity++;}
       else if (video.vote == "down"){
         video.popularity--;}
-      }
-    else {
-      console.log("You already voted on this")
+      } else {
+      alert("You have already voted on this video.")
     }
   };
   

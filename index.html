@@ -34,24 +34,19 @@
             </div>
             <a type="submit" class="btn btn-default" ng-if="route.id" ng-href="#!/featured">Submit</a>
           </form>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Login</a></li>
-          </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
 <!-- Load Partials -->
-    <div  class="container" ng-init="searchBy='';querySearch();">
-
-      <div class="col-md-7" id="content" data-ng-view>
+    <div  class="container" ng-init="initVideosLoad();">
+      <div class="col-md-7" id="content" data-ng-view >
     </div> 
 <!-- End Load Partials -->
 
       <div class="col-md-5"> 
-        <div class="ad">
-          <img ng-src="http://placekitten.com/359/200">
-        </div>
-        <div class="holder">
+      <!-- <div class="ad">
+        </div> -->
+        <div class="holder" >
           <h3>Top Ranked Videos</h3>
           <div x-ng-repeat="video in topVids | orderBy:'popularity':true" class="videoContainer">
             <div><img width="130" ng-src="http://img.youtube.com/vi/{{video.yt_id}}/mqdefault.jpg"></div>
