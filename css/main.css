@@ -41,6 +41,28 @@
   margin-bottom: 75px;
 }
 
+.votes {
+  text-align: center;
+}
+.glyphicon-thumbs-up, .glyphicon-thumbs-down {
+  font-size: 24px;
+}
+
+.glyphicon-thumbs-up {
+  margin-left: 25px;
+  margin-right: 10px;
+}
+
+.glyphicon-thumbs-down {
+  margin-right: 25px;
+}
+
+.glyphicon-thumbs-up:hover, .glyphicon-thumbs-down:hover {
+  color: blue;
+  cursor: pointer;
+  font-size: 24px;
+}
+
 /* Comment area */
 
 .commentArea {
