@@ -1,7 +1,17 @@
 <div class="mainVideoContainer">
   <div>
-    <iframe width="480" height="360" ng-src="{{trustSrc('http://youtube.com/embed/' + route.id + '?autoplay=1')}}" frameborder="0" allowfullscreen></iframe>
+    <iframe width="600" height="400" ng-src="{{trustSrc('http://youtube.com/embed/' + route.id + '?autoplay=1')}}" frameborder="0" allowfullscreen></iframe>
   </div>
+  <div class="description">{{singleVideo.description}}
+    <div class="votes">
+      <br>
+      Like this Video?
+      <span class="glyphicon glyphicon-thumbs-up" ng-click="singleVideo.vote='up';update(singleVideo)"></span>
+      <span class="glyphicon glyphicon-thumbs-down" ng-click="singleVideo.vote='down';update(singleVideo)"></span> 
+      Popularity: {{singleVideo.popularity}} 
+    </div>
+  </div>
+
 </div>
 
 <div disqus="route.id"></div>

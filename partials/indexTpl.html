@@ -1,7 +1,10 @@
-<div x-ng-repeat="video in videos">
-  <h1><a ng-href="{{ '#!/v/' + video.yt_id}}">{{video.title}}</a></h1>
+<div x-ng-repeat="video in videos" >
+  <h1 class="mainVideoTitle"><a ng-href="{{ '#!/v/' + video.yt_id}}">{{video.title}}</a></h1>
   <a ng-href="{{ '#!/v/' + video.yt_id}}"><div style="position:relative">
-    <img ng-src="http://img.youtube.com/vi/{{video.yt_id}}/0.jpg">
+    <img class="mainVideoImage" ng-src="http://img.youtube.com/vi/{{video.yt_id}}/0.jpg">
     <div class="bigThumb"></div>
   </div></a>
+  <div class="description">{{video.description}}</div>
 </div>
+
+<div x-ng-if="videos.length == 0">Sorry No Videos Found...Try again</div>
