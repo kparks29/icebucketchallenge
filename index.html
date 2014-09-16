@@ -32,7 +32,7 @@
             <div class="form-group">
               <input type="text" class="form-control" placeholder="Search For Videos" ng-model="searchBy" id="search" ng-keyup="querySearch();">
             </div>
-            <!-- <button type="submit" class="btn btn-default">Submit</button> -->
+            <a type="submit" class="btn btn-default" ng-if="route.id" ng-href="#!/featured">Submit</a>
           </form>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#">Login</a></li>
@@ -52,12 +52,15 @@
         </div>
         <div class="holder">
           <h3>Top Ranked Videos</h3>
-          <div x-ng-repeat="video in topVids | orderBy:'favorite_count':true" class="videoContainer">
+          <div x-ng-repeat="video in topVids | orderBy:'popularity':true" class="videoContainer">
             <div><img width="130" ng-src="http://img.youtube.com/vi/{{video.yt_id}}/mqdefault.jpg"></div>
-            <div>
-              <h5><a ng-href="{{ '#!/v/' + video.yt_id}}">{{video.title|truncate:49}}</a> : {{video.popularity}}</h5>
-              <h5 ng-click="video.vote='up';update(video)" >Up Vote</h5>
-              <h5 ng-click="video.vote='down';update(video)" >Down Vote</h5>
+            <div class="titleContainer">
+              <div class="video-vote">
+                <span class="glyphicon glyphicon-chevron-up" ng-click="video.vote='up';update(video)"></span><br/>
+                  {{video.popularity}} <br/>
+                <span class="glyphicon glyphicon-chevron-down" ng-click="video.vote='down';update(video)"></span>  
+              </div>
+              <h5><a ng-href="{{ '#!/v/' + video.yt_id}}">{{video.title|truncate:49}}</a></h5>
             </div> 
           </div>
         </div>

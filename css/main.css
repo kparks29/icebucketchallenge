@@ -85,11 +85,20 @@
 
 .videoContainer div {
   float: left;
-  width: 45%;
   height: 90%;
   margin-top: 15px;
   margin-left: 15px;
 }
+
+
+.titleContainer {
+  width: 60%;
+}
+
+.titleContainer h5 {
+  margin-left: 30%;
+}
+
 
 .videoIframe {
   border: 1px solid blue;
