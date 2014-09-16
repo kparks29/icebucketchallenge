@@ -78,10 +78,9 @@
 
 .videoContainer div {
   float: left;
-  width: 45%;
   height: 90%;
   margin-top: 15px;
-  margin-left: 15px;
+  margin-left: 5px;
 }
 
 .videoIframe {
@@ -94,4 +93,14 @@
   height: 100%;
   width: 100%;
   overflow: scroll;
+}
+
+.video-img {
+  width: 30%
+}
+.video-vote {
+  width: 15%;
+}
+.video-title {
+  width: 40%;
 }
